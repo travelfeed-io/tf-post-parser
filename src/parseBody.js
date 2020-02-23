@@ -1,4 +1,4 @@
-const { sanitizeHtmlConfig } = require('sanitize-html');
+const sanitizeHtml = require('sanitize-html');
 const { DefaultRenderer } = require('steem-content-renderer');
 const { imageProxy } = require('./getImage');
 const {
@@ -11,7 +11,7 @@ const {
   tfAdBottom,
   tfAdTop,
 } = require('./regex');
-const { sanitizeConfig } = require('./sanitizeConfig');
+const { sanitizeHtmlConfig } = require('./sanitizeConfig');
 
 const renderer = new DefaultRenderer({
   baseUrl: 'https://travelfeed.io/',
@@ -90,9 +90,9 @@ const parseBody = (body, options) => {
     console.warn('Could not render post content');
   }
   // Sanitize
-  parsedBody = sanitizeHtmlConfig(
+  parsedBody = sanitizeHtml(
     parsedBody,
-    sanitizeConfig({
+    sanitizeHtmlConfig({
       secureLinks: options.secureLinks !== false,
       allLinksBlank: options.allLinksBlank === true,
       removeImageDimensions: options.removeImageDimensions === true,
