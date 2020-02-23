@@ -19,7 +19,7 @@ const ownDomains = [
   'travelfeed.io',
   'www.travelfeed.io',
   'staging.travelfeed.io',
-  'beta.travelfeed.io',
+  'dev.travelfeed.io',
 ];
 
 const knownDomains = [

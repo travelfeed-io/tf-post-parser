@@ -10,7 +10,6 @@
   "author": "Julian Peters",
   "dependencies": {
     "bs58": "^4.0.1",
-    "reading-time": "^1.2.0",
     "sanitize-html": "^1.21.1",
     "steem-content-renderer": "^2.1.1",
     "url-parse": "^1.4.7"
