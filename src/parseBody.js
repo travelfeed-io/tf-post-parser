@@ -11,7 +11,7 @@ const {
   tfAdBottom,
   tfAdTop,
 } = require('./regex');
-const sanitizeConfig = require('./sanitizeConfig');
+const { sanitizeConfig } = require('./sanitizeConfig');
 
 const renderer = new DefaultRenderer({
   baseUrl: 'https://travelfeed.io/',
