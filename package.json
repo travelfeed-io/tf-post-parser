@@ -4,21 +4,21 @@
   "description": "Parse and sanitize posts",
   "main": "src/index.js",
   "scripts": {
-    "start": "node -r esm src/index.js",
-    "dev": "nodemon -r esm src/index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "author": "Julian Peters",
   "dependencies": {
     "bs58": "^4.0.1",
     "reading-time": "^1.2.0",
     "sanitize-html": "^1.21.1",
-    "steem-content-renderer": "^2.1.1"
+    "steem-content-renderer": "^2.1.1",
+    "url-parse": "^1.4.7"
   },
   "devDependencies": {
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-prettier": "^3.1.1",
-    "esm": "^3.2.25",
     "nodemon": "^1.19.3",
     "prettier": "^1.18.2"
   }
