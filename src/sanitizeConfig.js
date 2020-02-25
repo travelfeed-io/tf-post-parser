@@ -67,6 +67,9 @@ const iframeWhitelist = [
     re: /^(https?:)?\/\/www\.google\.com\/maps(|\/d)\/embed.*/i,
   },
   {
+    re: /^https:\/\/www\.facebook\.com\/plugins\/video\.php\?href=https:\/\/www\.facebook\.com\/.*/i,
+  },
+  {
     re: /^(https?:)?\/\/(?:emb\.)?(?:d.tube\/#!\/(?:v\/)?)([a-zA-Z0-9\-./]*)/i,
   },
   {
