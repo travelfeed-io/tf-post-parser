@@ -10,7 +10,7 @@ const {
   swmregex,
   tfAdBottom,
   tfAdTop,
-} = require('./regex');
+} = require('./helpers/regex');
 const { sanitizeHtmlConfig } = require('./sanitizeConfig');
 
 const renderer = new DefaultRenderer({

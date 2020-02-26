@@ -12,7 +12,7 @@ future problems:
 
 const sanitizeHtml = require('sanitize-html');
 const URL = require('url-parse');
-const { ownUrl } = require('./regex');
+const { ownUrl } = require('./helpers/regex');
 
 const ownDomains = [
   'localhost',
