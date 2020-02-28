@@ -26,12 +26,13 @@ communities.forEach(({ tag }) => {
 });
 
 const getCommunity = category => {
+  let res;
   communities.forEach(community => {
     if (community.tag === category) {
-      return community;
+      res = community;
     }
   });
-  return {};
+  return res;
 };
 
 module.exports = { communities, communityList, getCommunity };
