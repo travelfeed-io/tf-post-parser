@@ -1,7 +1,7 @@
 const readingTime = require('reading-time');
 const sanitize = require('sanitize-html');
 const { parseBody } = require('tf-post-parser');
-const { isSpam } = require('./isSpam');
+const { isSpam } = require('./helpers/isSpam');
 
 const processBody = body => {
   const htmlBody = parseBody(body, {});
