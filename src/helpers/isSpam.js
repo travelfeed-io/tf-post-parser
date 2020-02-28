@@ -1,4 +1,4 @@
-export const isSpam = body => {
+const isSpam = body => {
   if (body.length < 3) return true;
   if (
     (body.length < 10 && body.match(/!DERANGED/)) ||
@@ -14,4 +14,8 @@ export const isSpam = body => {
   )
     return true;
   return false;
+};
+
+module.exports = {
+  isSpam,
 };
