@@ -26,7 +26,7 @@ communities.forEach(({ tag }) => {
 });
 
 const getCommunity = category => {
-  let res;
+  let res = { title: 'TravelFeed', tag: 'hive-184437', lang: 'en' };
   communities.forEach(community => {
     if (community.tag === category) {
       res = community;
