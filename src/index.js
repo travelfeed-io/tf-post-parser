@@ -6,6 +6,7 @@ const { processBody } = require('./processBody');
 const { getPostLocation } = require('./getPostLocation');
 const { asyncForEach } = require('./asyncForEach');
 const { communities, communityList, getCommunity } = require('./communities');
+const { getThumbnail } = require('./getThumbnail');
 
 module.exports = {
   parseBody,
@@ -20,4 +21,5 @@ module.exports = {
   communityList,
   getCommunity,
   asyncForEach,
+  getThumbnail,
 };
