@@ -22,13 +22,13 @@ const getLocation = (coordinates, category) => {
               },
             });
           else {
-            let subDivision = data.address.state;
-            if (!subDivision) subDivision = data.address.region;
-            if (!subDivision) subDivision = data.address.state_district;
-            if (!subDivision) subDivision = data.address.county;
+            let subdivision = data.address.state;
+            if (!subdivision) subdivision = data.address.region;
+            if (!subdivision) subdivision = data.address.state_district;
+            if (!subdivision) subdivision = data.address.county;
             resolve({
               countryCode: data.address.country_code,
-              subDivision: (category !== 'country' && subDivision) || undefined,
+              subdivision: (category !== 'country' && subdivision) || undefined,
               city:
                 (category !== 'country' &&
                   category !== 'subdivision' &&

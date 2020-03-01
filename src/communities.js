@@ -1,23 +1,23 @@
 const communities = [
-  { title: 'TravelFeed', tag: 'hive-184437', lang: 'en' },
-  { title: 'Backpacking', tag: 'hive-166666', lang: 'en' },
-  { title: 'Budget Travel', tag: 'hive-133337', lang: 'en' },
-  { title: 'Camping and Hiking', tag: 'hive-147474', lang: 'en' },
-  { title: 'CycleFeed', tag: 'hive-188888', lang: 'en' },
-  { title: 'Digital Nomads', tag: 'hive-199999', lang: 'en' },
-  { title: 'Flights', tag: 'hive-122222', lang: 'en' },
-  { title: 'Food of the World', tag: 'hive-155555', lang: 'en' },
-  { title: 'Hitchhiking', tag: 'hive-177777', lang: 'en' },
-  { title: 'Road Trips', tag: 'hive-144444', lang: 'en' },
-  { title: 'Solo Travel', tag: 'hive-100705', lang: 'en' },
-  { title: 'Travel Hacks', tag: 'hive-100001', lang: 'en' },
-  { title: 'Urban Exploration', tag: 'hive-104387', lang: 'en' },
-  { title: 'PL-TravelFeed', tag: 'hive-191315', lang: 'pl' },
-  { title: 'KR-TravelFeed', tag: 'hive-129292', lang: 'kr' },
-  { title: 'CN-TravelFeed', tag: 'hive-123123', lang: 'cn' },
-  { title: 'ES-TravelFeed', tag: 'hive-136361', lang: 'es' },
-  { title: 'DE-TravelFeed', tag: 'hive-103030', lang: 'de' },
-  { title: 'IT-TravelFeed', tag: 'hive-171717', lang: 'it' },
+  { title: 'TravelFeed', id: 184437, lang: 'en' },
+  { title: 'Backpacking', id: 166666, lang: 'en', tag: 'backpacking' },
+  { title: 'Budget Travel', id: 133337, lang: 'en', tag: 'budgettravel' },
+  { title: 'Camping and Hiking', id: 147474, lang: 'en', tag: 'hiking' },
+  { title: 'CycleFeed', id: 188888, lang: 'en', tag: 'cyclefeed' },
+  { title: 'Digital Nomads', id: 199999, lang: 'en', tag: 'digitalnomads' },
+  { title: 'Flights', id: 122222, lang: 'en' },
+  { title: 'Food of the World', id: 155555, lang: 'en', tag: 'foodoftheworld' },
+  { title: 'Hitchhiking', id: 177777, lang: 'en', tag: 'hitchhiking' },
+  { title: 'Road Trips', id: 144444, lang: 'en', tag: 'roadtrip' },
+  { title: 'Solo Travel', id: 100705, lang: 'en' },
+  { title: 'Travel Hacks', id: 100001, lang: 'en' },
+  { title: 'Urban Exploration', id: 104387, lang: 'en', tag: 'urbex' },
+  { title: 'PL-TravelFeed', id: 191315, lang: 'pl', tag: 'pl-travelfeed' },
+  { title: 'KR-TravelFeed', id: 129292, lang: 'kr', tag: 'kr-travelfeed' },
+  { title: 'CN-TravelFeed', id: 123123, lang: 'cn', tag: 'cn-travelfeed' },
+  { title: 'ES-TravelFeed', id: 136361, lang: 'es', tag: 'es-travelfeed' },
+  { title: 'DE-TravelFeed', id: 103030, lang: 'de', tag: 'de-travelfeed' },
+  { title: 'IT-TravelFeed', id: 171717, lang: 'it', tag: 'it-travelfeed' },
 ];
 
 const communityList = [];
@@ -25,13 +25,30 @@ communities.forEach(({ tag }) => {
   communityList.push(tag);
 });
 
-const getCommunity = category => {
-  let res = { title: 'TravelFeed', tag: 'hive-184437', lang: 'en' };
+const getCommunity = (category, tags, location) => {
+  let res;
   communities.forEach(community => {
-    if (community.tag === category) {
+    if (`hive-${community.id}` === category) {
       res = community;
     }
   });
+  // If no community set estimate community from tag
+  if (!res) {
+    communities.forEach(community => {
+      if (tags.indexOf(community.tag) !== -1) {
+        res = community;
+      }
+    });
+  }
+  if (!res) {
+    if (tags.indexOf('traveladvice') !== -1 && !location) {
+      res = { title: 'Travel Hacks', id: 100001, lang: 'en' };
+    }
+  }
+  // If no community, set standard community
+  if (!res) {
+    res = { title: 'TravelFeed', id: 184437, lang: 'en' };
+  }
   return res;
 };
 
