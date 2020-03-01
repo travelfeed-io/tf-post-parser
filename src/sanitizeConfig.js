@@ -229,7 +229,7 @@ const sanitizeHtmlConfig = ({
         !hostname.match(ownUrl)
       ) {
         attys.target = '_blank';
-        attys.rel = 'nofollow noopener noreferrer';
+        attys.rel = 'ugc noopener noreferrer';
       }
       attys.href = href;
 
