@@ -33,14 +33,14 @@ const getCommunity = (category, tags, location) => {
     }
   });
   // If no community set estimate community from tag
-  if (!res) {
+  if (!res && tags) {
     communities.forEach(community => {
       if (tags.indexOf(community.tag) !== -1) {
         res = community;
       }
     });
   }
-  if (!res) {
+  if (!res && tags) {
     if (tags.indexOf('traveladvice') !== -1 && !location) {
       res = { title: 'Travel Hacks', id: 100001, lang: 'en' };
     }
