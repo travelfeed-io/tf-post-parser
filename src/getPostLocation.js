@@ -9,6 +9,10 @@ const options = {
 const nominatim = new Nominatim(options);
 
 const getLocation = (coordinates, category) => {
+  const resCoordinates = {
+    type: 'Point',
+    coordinates: [coordinates.longitude, coordinates.latitude],
+  };
   return new Promise(resolve => {
     try {
       nominatim.reverse(
@@ -16,10 +20,7 @@ const getLocation = (coordinates, category) => {
         (err, res, data) => {
           if (err || !data || !data.address)
             resolve({
-              coordinates: {
-                type: 'Point',
-                coordinates: [coordinates.latitude, coordinates.longitude],
-              },
+              coordinates: resCoordinates,
             });
           else {
             let subdivision = data.address.state;
@@ -34,21 +35,13 @@ const getLocation = (coordinates, category) => {
                   category !== 'subdivision' &&
                   data.address.city) ||
                 undefined,
-              coordinates: {
-                type: 'Point',
-                coordinates: [coordinates.longitude, coordinates.latitude],
-              },
+              coordinates: resCoordinates,
             });
           }
         },
       );
     } catch (error) {
-      resolve({
-        coordinates: {
-          type: 'Point',
-          coordinates: [coordinates.latitude, coordinates.longitude],
-        },
-      });
+      resolve({ coordinates: resCoordinates });
     }
   });
 };
