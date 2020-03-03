@@ -36,7 +36,7 @@ const getLocation = (coordinates, category) => {
                 undefined,
               coordinates: {
                 type: 'Point',
-                coordinates: [coordinates.latitude, coordinates.longitude],
+                coordinates: [coordinates.longitude, coordinates.latitude],
               },
             });
           }
