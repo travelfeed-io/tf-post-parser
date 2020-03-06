@@ -36,7 +36,7 @@ const calculateScore = async ({
       }
     });
   } else if (oldSmiles) {
-    voteList = smiles;
+    voteList = oldSmiles;
   }
   let isTopPick = false;
   voteList.forEach(({ voter, value }) => {
