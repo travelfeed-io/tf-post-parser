@@ -54,7 +54,10 @@ const getPostLocation = (body, json) => {
   }
   const swm = swmregex.exec(body);
   if (swm && swm.length > 2) {
-    return getLocation({ latitude: swm[1], longitude: swm[2] }).then(res => {
+    return getLocation({
+      latitude: parseFloat(swm[1]),
+      longitude: parseFloat(swm[2]),
+    }).then(res => {
       return res;
     });
   }
