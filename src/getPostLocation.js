@@ -9,6 +9,8 @@ const options = {
 const nominatim = new Nominatim(options);
 
 const getLocation = (coordinates, category) => {
+  if (coordinates.longitude === undefined || coordinates.latitude === undefined)
+    return undefined;
   const resCoordinates = {
     type: 'Point',
     coordinates: [coordinates.longitude, coordinates.latitude],
