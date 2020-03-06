@@ -7,6 +7,7 @@ const { getPostLocation } = require('./getPostLocation');
 const { asyncForEach } = require('./asyncForEach');
 const { communities, communityList, getCommunity } = require('./communities');
 const { getThumbnail } = require('./getThumbnail');
+const { calculateScore } = require('./calculateScore');
 
 module.exports = {
   parseBody,
@@ -22,4 +23,5 @@ module.exports = {
   getCommunity,
   asyncForEach,
   getThumbnail,
+  calculateScore,
 };

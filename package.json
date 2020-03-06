@@ -10,6 +10,7 @@
   "author": "Julian Peters",
   "dependencies": {
     "bs58": "^4.0.1",
+    "dayjs": "^1.8.21",
     "node-nominatim2": "^0.1.0",
     "reading-time": "^1.2.0",
     "sanitize-html": "^1.21.1",
