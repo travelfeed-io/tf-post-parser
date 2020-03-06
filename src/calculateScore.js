@@ -7,6 +7,7 @@ const calculateScore = async ({
   manualSmiles,
   location,
   oldEvaluation,
+  oldSmiles,
 }) => {
   const daysSinceTfStart = dayjs(createdAt).diff(dayjs('2018-02-01'), 'days');
   let totalscore = daysSinceTfStart * 3;
@@ -20,19 +21,23 @@ const calculateScore = async ({
   const evaluation = oldEvaluation || {};
   const { score } = evaluation;
   if (score) totalscore += score * 150;
-  const voteList = [];
-  const tmpList = votes.split('\n');
-  tmpList.forEach(v => {
-    const vote = v.split(',');
-    const voter = vote[0];
-    const value = parseInt(vote[2]);
-    voteList.push({ voter, value });
-    if (allUsers.indexOf(voter) !== -1) {
-      const smilesValue = Math.round(value / 1000);
-      smiles.push({ voter, value: smilesValue });
-      totalSmiles += smilesValue;
-    }
-  });
+  let voteList = [];
+  if (votes) {
+    const tmpList = votes.split('\n');
+    tmpList.forEach(v => {
+      const vote = v.split(',');
+      const voter = vote[0];
+      const value = parseInt(vote[2]);
+      voteList.push({ voter, value });
+      if (allUsers.indexOf(voter) !== -1) {
+        const smilesValue = Math.round(value / 1000);
+        smiles.push({ voter, value: smilesValue });
+        totalSmiles += smilesValue;
+      }
+    });
+  } else if (oldSmiles) {
+    voteList = smiles;
+  }
   let isTopPick = false;
   voteList.forEach(({ voter, value }) => {
     if (!score && voter === 'travelfeed') {
