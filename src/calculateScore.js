@@ -1,9 +1,13 @@
 const dayjs = require('dayjs');
 
-const calculateScore = async (
-  CurationScore,
-  { votes, author, permlink, createdAt, allUsers, manualSmiles, location },
-) => {
+const calculateScore = async ({
+  votes,
+  createdAt,
+  allUsers,
+  manualSmiles,
+  location,
+  oldEvaluation,
+}) => {
   const daysSinceTfStart = dayjs(createdAt).diff(dayjs('2018-02-01'), 'days');
   let totalscore = daysSinceTfStart * 3;
   const smiles = [];
@@ -13,13 +17,7 @@ const calculateScore = async (
       totalscore += value;
     });
   }
-  // get curation score from mongo
-  const evaluation = await CurationScore.findOne({ author, permlink }).then(
-    res => {
-      if (!res) return {};
-      return res;
-    },
-  );
+  const evaluation = oldEvaluation || {};
   const { score } = evaluation;
   if (score) totalscore += score * 150;
   const voteList = [];
