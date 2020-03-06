@@ -9,12 +9,12 @@ const options = {
 const nominatim = new Nominatim(options);
 
 const getLocation = (coordinates, category) => {
-  if (coordinates.longitude === undefined || coordinates.latitude === undefined)
-    return undefined;
-  const resCoordinates = {
+  let resCoordinates = {
     type: 'Point',
     coordinates: [coordinates.longitude, coordinates.latitude],
   };
+  if (coordinates.longitude === undefined || coordinates.latitude === undefined)
+    resCoordinates = undefined;
   return new Promise(resolve => {
     try {
       nominatim.reverse(
