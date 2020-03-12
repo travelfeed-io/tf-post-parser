@@ -25,6 +25,11 @@ communities.forEach(({ tag }) => {
   communityList.push(tag);
 });
 
+const communityIdList = [];
+communities.forEach(({ id }) => {
+  communityIdList.push(id);
+});
+
 const getCommunity = (category, tags, location) => {
   let res;
   communities.forEach(community => {
@@ -52,4 +57,4 @@ const getCommunity = (category, tags, location) => {
   return res;
 };
 
-module.exports = { communities, communityList, getCommunity };
+module.exports = { communities, communityList, communityIdList, getCommunity };

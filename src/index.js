@@ -5,7 +5,12 @@ const { cleanTags, photoTags, removeTags } = require('./cleanTags');
 const { processBody } = require('./processBody');
 const { getPostLocation } = require('./getPostLocation');
 const { asyncForEach } = require('./asyncForEach');
-const { communities, communityList, getCommunity } = require('./communities');
+const {
+  communities,
+  communityList,
+  communityIdList,
+  getCommunity,
+} = require('./communities');
 const { getThumbnail } = require('./getThumbnail');
 const { calculateScore } = require('./calculateScore');
 
@@ -20,6 +25,7 @@ module.exports = {
   getPostLocation,
   communities,
   communityList,
+  communityIdList,
   getCommunity,
   asyncForEach,
   getThumbnail,
