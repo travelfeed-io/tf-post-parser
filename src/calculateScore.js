@@ -31,8 +31,10 @@ const calculateScore = async ({
       voteList.push({ voter, value });
       if (allUsers.indexOf(voter) !== -1) {
         const smilesValue = Math.round(value / 1000);
-        smiles.push({ voter, value: smilesValue });
-        totalSmiles += smilesValue;
+        if (smilesValue !== 0) {
+          smiles.push({ voter, value: smilesValue });
+          totalSmiles += smilesValue;
+        }
       }
     });
   } else if (oldSmiles) {
