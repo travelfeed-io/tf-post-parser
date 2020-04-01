@@ -8,17 +8,18 @@ const options = {
 };
 const nominatim = new Nominatim(options);
 
-const getLocation = (coordinates, category) => {
+const getLocation = args => {
+  const { category } = args;
   let resCoordinates = {
     type: 'Point',
-    coordinates: [coordinates.longitude, coordinates.latitude],
+    coordinates: [args.longitude, args.latitude],
   };
-  if (coordinates.longitude === undefined || coordinates.latitude === undefined)
+  if (args.longitude === undefined || args.latitude === undefined)
     resCoordinates = undefined;
   return new Promise(resolve => {
     try {
       nominatim.reverse(
-        { lat: coordinates.latitude, lon: coordinates.longitude },
+        { lat: args.latitude, lon: args.longitude },
         (err, res, data) => {
           if (err || !data || !data.address)
             resolve({
