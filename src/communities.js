@@ -2,7 +2,7 @@ const communities = [
   { title: 'TravelFeed', id: 184437, lang: 'en' },
   { title: 'Backpacking', id: 166666, lang: 'en', tag: 'backpacking' },
   { title: 'Budget Travel', id: 133337, lang: 'en', tag: 'budgettravel' },
-  { title: 'Camping and Hiking', id: 147474, lang: 'en', tag: 'hiking' },
+  { title: 'Outdoors', id: 113634, lang: 'en', tag: 'outdoors' },
   { title: 'CycleFeed', id: 188888, lang: 'en', tag: 'cyclefeed' },
   { title: 'Digital Nomads', id: 199999, lang: 'en', tag: 'digitalnomads' },
   { title: 'Flights', id: 122222, lang: 'en' },
