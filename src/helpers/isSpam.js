@@ -10,6 +10,7 @@ const isSpam = body => {
   if (
     body.match(/steemit/i) ||
     body.match(/#posh/) ||
+    body.match(/PhotoStream/) ||
     body.match(/Thanks for writing this comment through TravelFeed\.io!/)
   )
     return true;
