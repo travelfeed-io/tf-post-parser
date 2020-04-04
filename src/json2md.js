@@ -1,6 +1,6 @@
 const sanitize = require('sanitize-html');
 const { sanitizeHtmlConfig } = require('./sanitizeConfig');
-const TurndownService = require('turndown');
+import TurndownService from 'turndown';
 
 const turndownService = new TurndownService({ emDelimiter: '*' });
 
