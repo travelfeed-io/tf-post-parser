@@ -13,7 +13,6 @@ const {
 } = require('./communities');
 const { getThumbnail } = require('./getThumbnail');
 const { calculateScore } = require('./calculateScore');
-const { json2md } = require('./json2md');
 
 module.exports = {
   parseBody,
