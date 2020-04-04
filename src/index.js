@@ -30,5 +30,4 @@ module.exports = {
   asyncForEach,
   getThumbnail,
   calculateScore,
-  json2md,
 };
