@@ -64,9 +64,11 @@ const parseBody = (body, options) => {
   );
   // Remove SWM snippets with description
   parsedBody = parsedBody.replace(
-    /!\bsteemitworldmap\b\s((?:[-+]?(?:[1-8]?\d(?:\.\d+)?|90(?:\.0+)?)))\s\blat\b\s((?:[-+]?(?:180(?:\.0+)?|(?:(?:1[0-7]\d)|(?:[1-9]?\d))(?:\.\d+)?)))\s\blong.*d3scr/gi,
+    /!\b(?:steemitworldmap|pinmapple)\b\s((?:[-+]?(?:[1-8]?\d(?:\.\d+)?|90(?:\.0+)?)))\s\blat\b\s((?:[-+]?(?:180(?:\.0+)?|(?:(?:1[0-7]\d)|(?:[1-9]?\d))(?:\.\d+)?)))\s\blong.*d3scr/gi,
     '',
   );
+  // Remove easy editor swm remains
+  parsedBody = parsedBody.replace(/\\\[\/\/\\\]:# \(\)/gi, '');
   // Turn Instagram URLs into embeds
   parsedBody = parsedBody.replace(
     instagramPost,
@@ -77,6 +79,10 @@ const parseBody = (body, options) => {
     /(?:http[s]?:\/\/)?(?:www.)?open\.spotify\.com\/track\/([a-zA-Z0-9]*)/gi,
     `<iframe src="https://open.spotify.com/embed/track/$1" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media" />`,
   );
+  // If enabled: Remove tfjson
+  if (options.removeJson) {
+    parsedBody = parsedBody.replace(/<div json='.*'>.*<\/div>/gi, '');
+  }
 
   // Remove preview images in dtube posts with dtube embeds
   parsedBody = parsedBody.replace(dtubeImageRegex, '');
