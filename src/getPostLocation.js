@@ -30,13 +30,18 @@ const getLocation = args => {
             if (!subdivision) subdivision = data.address.region;
             if (!subdivision) subdivision = data.address.state_district;
             if (!subdivision) subdivision = data.address.county;
+            const city = data.address.city;
+            if ((!subdivision && city) || subdivision === city) {
+              subdivision = city;
+              city === undefined;
+            }
             resolve({
               countryCode: data.address.country_code,
               subdivision: (category !== 'country' && subdivision) || undefined,
               city:
                 (category !== 'country' &&
                   category !== 'subdivision' &&
-                  data.address.city) ||
+                  city) ||
                 undefined,
               coordinates: resCoordinates,
             });
