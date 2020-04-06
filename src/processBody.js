@@ -4,8 +4,9 @@ const { parseBody } = require('./parseBody');
 const { isSpam } = require('./helpers/isSpam');
 
 const processBody = body => {
-  const htmlBody = parseBody(body, { removeJson: true });
-  const sanitized = sanitize(htmlBody, { allowedTags: [] });
+  const htmlBody = parseBody(body, {});
+  const bodyToSanitize = parseBody(body, { removeJson: true });
+  const sanitized = sanitize(bodyToSanitize, { allowedTags: [] });
   const readtime = readingTime(sanitized);
   const { minutes, words } = readtime;
   const excerpt = sanitized.substring(0, 350);
