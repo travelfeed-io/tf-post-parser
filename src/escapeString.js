@@ -1,13 +1,11 @@
 const escapeString = string => {
-  const cleanString = string
+  return string
     .replace(/\n/g, ' ')
     .replace(/\s\s/g, ' ')
     .replace(/^\s/, '')
-    .replace(/\s[^\s]*$/, '');
-  return JSON.stringify(cleanString).substring(
-    1,
-    JSON.stringify(cleanString).length - 1,
-  );
+    .replace(/\s[^\s]*$/, '')
+    .replace(/'/g, '’')
+    .replace(/"/g, '”');
 };
 
 module.exports = { escapeString };
