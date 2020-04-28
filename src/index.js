@@ -13,6 +13,7 @@ const {
 } = require('./communities');
 const { getThumbnail } = require('./getThumbnail');
 const { calculateScore } = require('./calculateScore');
+const { escapeString } = require('./escapeString');
 
 module.exports = {
   parseBody,
@@ -30,4 +31,5 @@ module.exports = {
   asyncForEach,
   getThumbnail,
   calculateScore,
+  escapeString,
 };
