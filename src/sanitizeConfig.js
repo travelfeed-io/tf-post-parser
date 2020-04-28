@@ -70,9 +70,6 @@ const iframeWhitelist = [
     re: /^https:\/\/www\.facebook\.com\/plugins\/video\.php\?href=https:\/\/www\.facebook\.com\/.*/i,
   },
   {
-    re: /^(https?:)?\/\/(?:emb\.)?(?:d.tube\/#!\/(?:v\/)?)([a-zA-Z0-9\-./]*)/i,
-  },
-  {
     re: /^(https?:)?\/\/w.soundcloud.com\/player\/.*/i,
     fn: src => {
       if (!src) return null;
