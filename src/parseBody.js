@@ -91,7 +91,7 @@ const parseBody = (body, options) => {
   // Render markdown to HTML
   try {
     parsedBody = parsedBody.length > 0 ? renderer.render(parsedBody) : '';
-  } catch {
+  } catch (err) {
     // TODO: Content renderer needs an update to not throw an exception when script tags are used
     console.warn('Could not render post content');
   }
