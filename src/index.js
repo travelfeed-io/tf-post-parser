@@ -14,6 +14,14 @@ const {
 const { getThumbnail } = require('./getThumbnail');
 const { calculateScore } = require('./calculateScore');
 const { escapeString } = require('./escapeString');
+const {
+  slugFromCC,
+  nameFromCC,
+  ccFromSlug,
+  nameFromSlug,
+  randomCountry,
+  popularCountries,
+} = require('./countryCodes');
 
 module.exports = {
   parseBody,
@@ -32,4 +40,10 @@ module.exports = {
   getThumbnail,
   calculateScore,
   escapeString,
+  slugFromCC,
+  nameFromCC,
+  ccFromSlug,
+  nameFromSlug,
+  randomCountry,
+  popularCountries,
 };
