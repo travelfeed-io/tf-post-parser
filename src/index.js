@@ -3,7 +3,6 @@ const { parseBody } = require('./parseBody');
 const { sanitizeHtmlConfig } = require('./sanitizeConfig');
 const { cleanTags, photoTags, removeTags } = require('./cleanTags');
 const { processBody } = require('./processBody');
-const { getPostLocation } = require('./getPostLocation');
 const { asyncForEach } = require('./asyncForEach');
 const {
   communities,
@@ -31,7 +30,6 @@ module.exports = {
   photoTags,
   removeTags,
   processBody,
-  getPostLocation,
   communities,
   communityList,
   communityIdList,
