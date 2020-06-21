@@ -1,8 +1,5 @@
 const { imageProxy } = require('./getImage');
-const { parseBody } = require('./parseBody');
-const { sanitizeHtmlConfig } = require('./sanitizeConfig');
 const { cleanTags, photoTags, removeTags } = require('./cleanTags');
-const { processBody } = require('./processBody');
 const { asyncForEach } = require('./asyncForEach');
 const {
   communities,
@@ -23,13 +20,10 @@ const {
 } = require('./countryCodes');
 
 module.exports = {
-  parseBody,
   imageProxy,
-  sanitizeHtmlConfig,
   cleanTags,
   photoTags,
   removeTags,
-  processBody,
   communities,
   communityList,
   communityIdList,
