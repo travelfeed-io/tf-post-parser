@@ -11,10 +11,9 @@ const imageProxy = (imgUrl, width, height, mode, format) => {
     const address = bs58.encode(bytes);
     // Use webp as format for best compression if supported
     // Get the cropped steemitimages URL for an image
-    return `https://steemitimages.com/p/${address}/?format=${format ||
-      'match'}${width ? `&width=${width}` : ''}${
-      height ? `&height=${height}` : ''
-    }${mode ? `&mode=${mode}` : ''}`;
+    return `https://images.hive.blog/p/${address}/?format=${format || 'match'}${
+      width ? `&width=${width}` : ''
+    }${height ? `&height=${height}` : ''}${mode ? `&mode=${mode}` : ''}`;
   } catch (err) {
     console.warn(err);
     return undefined;
