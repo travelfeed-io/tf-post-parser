@@ -18,7 +18,6 @@ const {
   randomCountry,
   popularCountries,
 } = require('./countryCodes');
-const regex = require('./regex');
 
 module.exports = {
   imageProxy,
@@ -39,5 +38,4 @@ module.exports = {
   nameFromSlug,
   randomCountry,
   popularCountries,
-  regex,
 };
