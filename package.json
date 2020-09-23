@@ -13,7 +13,7 @@
     "dayjs": "^1.8.21",
     "node-nominatim2": "^0.1.0",
     "reading-time": "^1.2.0",
-    "sanitize-html": "^1.21.1",
+    "sanitize-html": "^2.0.0",
     "steem-content-renderer": "^2.1.1",
     "url-parse": "^1.4.7"
   },
