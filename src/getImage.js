@@ -8,7 +8,7 @@ const imageProxy = (url, width, height, mode, format) => {
     let imgUrl = url;
     if (imgUrl.match(/images\.hive\.blog/)) {
       const hiveProxyMatch = imgUrl.match(
-        /https:\/\/images\.hive\.blog\/p\/(.*)\//,
+        /https:\/\/images\.hive\.blog\/p\/([^/]*)/,
       );
       if (hiveProxyMatch && hiveProxyMatch.length > 1) {
         return `https://images.hive.blog/p/${
