@@ -6,6 +6,19 @@ const imageProxy = (url, width, height, mode, format) => {
   }
   try {
     let imgUrl = url;
+    if (imgUrl.match(/images\.hive\.blog/)) {
+      const hiveProxyMatch = imgUrl.match(
+        /https:\/\/images\.hive\.blog\/p\/(.*)\//,
+      );
+      if (hiveProxyMatch && hiveProxyMatch.length > 1) {
+        return `https://images.hive.blog/p/${
+          hiveProxyMatch[1]
+        }/?format=${format || 'match'}${width ? `&width=${width}` : ''}${
+          height ? `&height=${height}` : ''
+        }${mode ? `&mode=${mode}` : ''}`;
+      }
+    }
+
     if (
       !imgUrl.match(/img\.travelfeed\.io/) &&
       !imgUrl.match(/steemitimages\.com/) &&
