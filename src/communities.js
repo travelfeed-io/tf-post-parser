@@ -19,7 +19,7 @@ const communities = [
   { title: 'DE-TravelFeed', id: 103030, lang: 'de', tag: 'de-travelfeed' },
   { title: 'IT-TravelFeed', id: 171717, lang: 'it', tag: 'it-travelfeed' },
   { title: 'TF International', id: 175111 },
-  { title: 'Truvvl', id: 100037 },
+  { title: 'Truvvl', id: 100037, lang: 'en' },
 ];
 
 const communityList = [];
