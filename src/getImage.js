@@ -4,12 +4,14 @@ const imageProxy = (url, width, height, mode, format) => {
   if (!url) {
     return undefined;
   }
+  const isGif = url.substring(url.length - 3, url.length) === 'gif';
   try {
     let imgUrl = url;
     if (imgUrl.match(/images\.hive\.blog/)) {
       const hiveProxyMatch = imgUrl.match(
         /https:\/\/images\.hive\.blog\/p\/([^/]*)/,
       );
+      if (isGif) return imgUrl;
       if (hiveProxyMatch && hiveProxyMatch.length > 1) {
         return `https://images.hive.blog/p/${
           hiveProxyMatch[1]
@@ -40,7 +42,6 @@ const imageProxy = (url, width, height, mode, format) => {
     const address = bs58.encode(bytes);
     // Use webp as format for best compression if supported
     // Get the cropped steemitimages URL for an image
-    const isGif = url.substring(url.length - 3, url.length) === 'gif';
     return `https://images.hive.blog/p/${address}/?format=${format || 'match'}${
       width ? `&width=${width}` : ''
     }${height ? `&height=${height}` : ''}${mode ? `&mode=${mode}` : ''}${
