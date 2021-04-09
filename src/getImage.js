@@ -43,7 +43,7 @@ const imageProxy = (url, width, height, mode, format) => {
     const isGif = url.substring(url.length - 3, url.length) === 'gif';
     return `https://images.hive.blog/p/${address}/?format=${format || 'match'}${
       width ? `&width=${width}` : ''
-    }${height ? `&height=${height}` : ''}${mode ? `&mode=${mode}` : 'fit'}${
+    }${height ? `&height=${height}` : ''}${mode ? `&mode=${mode}` : ''}${
       isGif ? `&type=gif` : ''
     }`;
   } catch (err) {
