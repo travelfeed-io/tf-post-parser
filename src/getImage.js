@@ -40,9 +40,12 @@ const imageProxy = (url, width, height, mode, format) => {
     const address = bs58.encode(bytes);
     // Use webp as format for best compression if supported
     // Get the cropped steemitimages URL for an image
+    const isGif = url.substring(url.length - 3, url.length) === 'gif';
     return `https://images.hive.blog/p/${address}/?format=${format || 'match'}${
       width ? `&width=${width}` : ''
-    }${height ? `&height=${height}` : ''}${mode ? `&mode=${mode}` : ''}`;
+    }${height ? `&height=${height}` : ''}${mode ? `&mode=${mode}` : 'fit'}${
+      isGif ? `&type=gif` : ''
+    }`;
   } catch (err) {
     console.warn(err);
     return undefined;
