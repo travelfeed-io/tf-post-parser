@@ -26,7 +26,9 @@ const imageProxy = (url, width, height, mode, format) => {
       !imgUrl.match(/steemitimages\.com/) &&
       !imgUrl.match(/files\.steempeak\.com/) &&
       !imgUrl.match(/files\.peakd\.com/) &&
-      !imgUrl.match(/images\.hive\.blog/)
+      !imgUrl.match(/images\.hive\.blog/) &&
+      !imgUrl.match(/images\.unsplash\.com/) &&
+      !imgUrl.match(/img\.esteem\.app/)
     ) {
       // Steemitimages needs to be used because it has a cache of images deleted from the origin
       // Base58 encode image url
