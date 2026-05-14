@@ -1,56 +1,66 @@
 const bs58 = require('bs58');
 
-const imageProxy = (url, width, height, mode, format) => {
-  if (!url) {
-    return undefined;
-  }
-  const isGif = url.substring(url.length - 3, url.length) === 'gif';
-  try {
-    let imgUrl = url;
-    if (imgUrl.match(/images\.hive\.blog/)) {
-      const hiveProxyMatch = imgUrl.match(
-        /https:\/\/images\.hive\.blog\/p\/([^/]*)/,
-      );
-      if (isGif) return imgUrl;
-      if (hiveProxyMatch && hiveProxyMatch.length > 1) {
-        return `https://images.hive.blog/p/${
-          hiveProxyMatch[1]
-        }/?format=${format || 'match'}${width ? `&width=${width}` : ''}${
-          height ? `&height=${height}` : ''
-        }${mode ? `&mode=${mode}` : ''}`;
+const urlSafeBase64 = string =>
+  Buffer.from(string)
+    .toString('base64')
+    .replace(/=/g, '')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_');
+
+// Recover the original source URL from a legacy images.hive.blog or
+// steemitimages.com proxy wrapper. Handles nested wrappers (e.g. legacy posts
+// where a steemitimages URL itself encodes another URL).
+const unwrapLegacyProxy = url => {
+  let current = url;
+  for (let i = 0; i < 5; i++) {
+    const pMatch = current.match(
+      /^https:\/\/(?:images\.hive\.blog|steemitimages\.com)\/p\/([^/?]+)/,
+    );
+    if (pMatch) {
+      try {
+        const decoded = Buffer.from(bs58.decode(pMatch[1])).toString('utf8');
+        if (decoded.startsWith('http')) {
+          current = decoded.split('?')[0];
+          continue;
+        }
+      } catch (e) {
+        // not valid bs58 — stop unwrapping
       }
     }
-
-    if (
-      !imgUrl.match(/img\.travelfeed\.io/) &&
-      !imgUrl.match(/steemitimages\.com/) &&
-      !imgUrl.match(/files\.steempeak\.com/) &&
-      !imgUrl.match(/files\.peakd\.com/) &&
-      !imgUrl.match(/images\.hive\.blog/) &&
-      !imgUrl.match(/images\.unsplash\.com/) &&
-      !imgUrl.match(/img\.esteem\.app/) &&
-      !imgUrl.match(/images\.ecency\.com/) &&
-      !imgUrl.match(/ipfs-3speak\.b-cdn\.net/)
-    ) {
-      // Steemitimages needs to be used because it has a cache of images deleted from the origin
-      // Base58 encode image url
-      // https://github.com/steemit/imagehoster
-      const bytes = Buffer.from(imgUrl);
-      const address = bs58.encode(bytes);
-      // Get the cropped steemitimages URL for an image
-      imgUrl = `https://steemitimages.com/p/${address}/?format=match&mode=fit`;
+    const sizeMatch = current.match(
+      /^https:\/\/images\.hive\.blog\/\d+x\d+\/(https?:\/\/.+)$/,
+    );
+    if (sizeMatch) {
+      current = sizeMatch[1];
+      continue;
     }
-    // Base58 encode image url
-    // https://github.com/steemit/imagehoster
-    const bytes = Buffer.from(imgUrl);
-    const address = bs58.encode(bytes);
-    // Use webp as format for best compression if supported
-    // Get the cropped steemitimages URL for an image
-    return `https://images.hive.blog/p/${address}/?format=${format || 'match'}${
-      width ? `&width=${width}` : ''
-    }${height ? `&height=${height}` : ''}${mode ? `&mode=${mode}` : ''}${
-      isGif ? `&type=gif` : ''
-    }`;
+    break;
+  }
+  return current;
+};
+
+const imageProxy = (url, width, height, mode, format, alwaysConvert) => {
+  if (!url) return undefined;
+  if (url.match(/img\.travelfeed\.io/) && !alwaysConvert) return url;
+
+  // 3speak sometimes double-prefixes its IPFS gateway. Strip the outer one.
+  if (
+    url.match(
+      /(https:\/\/ipfs-3speak\.b-cdn\.net\/ipfs\/)https:\/\/ipfs-3speak\.b-cdn\.net\/ipfs\/(?:.*)/,
+    )
+  ) {
+    url = url.replace(/^https:\/\/ipfs-3speak\.b-cdn\.net\/ipfs\//, '');
+  }
+
+  try {
+    const source = unwrapLegacyProxy(url);
+    const encoded = urlSafeBase64(source);
+    return (
+      'https://img.truvvle.com/?src=' +
+      encoded +
+      (width ? '&width=' + width : '') +
+      (height ? '&height=' + height : '')
+    );
   } catch (err) {
     console.warn(err);
     return undefined;
